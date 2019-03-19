@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: webmail
+  name: webserver
   namespace: monitoring
 spec:
   type: LoadBalancer
   selector:
-    app: webmail
+    app: webserver
   ports:
     #- protocol: "TCP"
     #  port: 443
@@ -37,20 +37,20 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: webmail
+  name: webserver
   namespace: monitoring
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: webmail
+        app: webserver
         track: stable
     spec:
       containers:
-        - name: webmail
+        - name: webserver
           #image: "udacity/example-auth:1.0.0"
-          image: webmail
+          image: webserver
           imagePullPolicy: Never
           ports:
             #- name: http

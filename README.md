@@ -21,3 +21,19 @@ System will be created with following kubernetes pods.
 you may check the created pods with following command
 
 ```kubectl get pods -n monitoring```
+
+If all pods are in running status then you can test it from the web.
+
+```https://localhost/phpminiadmin.php#```
+
+Give the username : root
+
+password : <Give the password given at installation process>
+
+Select "Advance setting" and give port and the host too.
+
+host : mysql 
+
+
+
+support : tharanga.rajapaksha@gmail.com

@@ -210,14 +210,14 @@ echoGreenBold 'mysql database created...'
 
 # Creating the namespace
 cd webserver
-docker build -t webmail .
+docker build -t webserver .
 cd ..
 echoGreenBold 'webmail image created...'
 kubectl create namespace monitoring 2> /dev/null || true
 echoGreenBold 'namespace monitoring created...'
 
 # Creating the web server
-kubectl create -f webserver/webmail.yaml 2> /dev/null || true
+kubectl create -f webserver/webserver.yaml 2> /dev/null || true
 echoGreenBold 'Webserver created...'
 
 
