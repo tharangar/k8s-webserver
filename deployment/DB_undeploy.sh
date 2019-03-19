@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# ------------------------------------------------------------------------
+#  (http://opensource.lk)
+#
+# 
+
+# ------------------------------------------------------------------------
 
 # methods
 
@@ -45,19 +51,6 @@ function echoGreenBold () {
     
 }
 
-
-# methods
-
-# color refference
-#Black        0;30     Dark Gray     1;30
-#Red          0;31     Light Red     1;31
-#Green        0;32     Light Green   1;32
-#Brown/Orange 0;33     Yellow        1;33
-#Blue         0;34     Light Blue    1;34
-#Purple       0;35     Light Purple  1;35
-#Cyan         0;36     Light Cyan    1;36
-#Light Gray   0;37     White         1;37
-
 # Creating The Banner
 #Colours
 red="\033[00;31m"
@@ -89,14 +82,13 @@ NRM="\e[0m"
 
 echo  "${RED}******************************************************************************"
 echo  "${WHITE}**                                                                          **"
-echo  "${WHITECHAR}**                                                                          **"
+echo  "${WHITECHAR}**                    COPPER EMAIL SOLUTION                                 **"
 echo  "${WHITE}**               Please share your experinace with us                       **"
-echo  "${WHITE}**               Email : tharanga.rajapaksha@gmail.com                      **"
+echo  "${WHITE}**               Email : support@copper.opensource.lk                       **"
 echo  "${RED}******************************************************************************"
 echo
 
-
-echoRedBold ' !!!!!!!! -Undeploying Copper Email Server - !!!!!!!! '
+echoRedBold ' !!!!!!!! -Undeploying Copper Database server - You will lost your data permanantly - !!!!!!!! '
 
 
 
@@ -104,30 +96,29 @@ read -r -p "Are you sure? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY])
 
+# 2> /dev/null || true   // statement is used to ignore and go ahead when a error received
+# 2>  true
 
-#Deleting webmail
+## delete the mysql deployment
+kubectl delete deployment,svc mysql --namespace=monitoring 2> /dev/null || true
 
-kubectl delete service webserver -n monitoring
+echoRedBold 'mysql deployment deleted...'
+# Persistent Volume Claim deletion
+kubectl delete PersistentVolumeClaim mysql-pv-claim --namespace=monitoring 2> /dev/null || true
 
-kubectl delete deployment webserver -n monitoring
+echoRedBold 'Persistent Volume Claim deleted...'
+# Persistent Volume delete
+kubectl delete service email --namespace=monitoring 2> /dev/null || true
 
-# if you dont want the docker image activate it
-#docker -rmi webserver
+echoRedBold 'Email service deleted...'
+# If you want to delete webmail service use following commands.
+kubectl delete service webmail --namespace=monitoring 2> /dev/null || true
 
-echoGreenBold 'Webserver deleted...'
+echoRedBold 'Persistent Volume deleted...'
 
-# Deleting the database
 
-#deleting the secret
-echoRedBold 'secret configurations goint to be deleted...'
-kubectl delete secret my-secret -n monitoring 2> /dev/null || true
-echoRedBold 'Secret configuration files deleted..'
 
-## deleting namespace
-kubectl delete namespace monitoring  2> /dev/null || true
-echoRedBold "k8s namespace deleted"
-
-echoGreenBold 'Finished'
+echoGreenBold 'Whole data removed Cant be recovered. \n Finished'
 
     ;;
     *)
