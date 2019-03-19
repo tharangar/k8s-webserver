@@ -8,7 +8,10 @@ You should have installed kubectl (docker desktop with kubernetes) in your host 
 
 You just have to change into deployment directory and exicute the deploy.sh file to start the system.
 
+```git clone https://github.com/tharangar/k8s-webserver.git```
+
 ```cd deployment```
+
 ```sh deploy.sh```
 
 Noy you have to provide the database name and the root user password for the system.
@@ -35,5 +38,5 @@ Select "Advance setting" and give port and the host too.
 host : mysql 
 
 
-
+Please contact if you have any issue regarding this solution.
 support : tharanga.rajapaksha@gmail.com
