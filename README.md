@@ -28,7 +28,7 @@ If all pods are in running status then you can test it from the web.
 
 Give the username : root
 
-password : <Give the password given at installation process>
+password : (Give the password given at installation process)
 
 Select "Advance setting" and give port and the host too.
 
